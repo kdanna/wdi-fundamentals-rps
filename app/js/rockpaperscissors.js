@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////
 /*   Provided Code - Please Don't Edit   */
 ////////////////////////////////////////////////
-'use strict';
+//'use strict';
 
 function getInput() {
     console.log("Please choose either 'rock', 'paper', or 'scissors'.")
@@ -21,35 +21,76 @@ function randomPlay() {
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
 
-function getPlayerMove(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `getInput()`.
-    return /* Your Expression */;
+    // This function operates on variable "move" to define what the player choice is. Player will get prompted chose rock, paper, or scissors. 4/26/16
+function getPlayerMove(move) {
+    return move || getInput();
 }
 
-function getComputerMove(move) {
+
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
-    return /* Your Expression */;
+    // I created a function that will operate on variable "move" which will be null, therefore function randomPlay will take effect. 4/26/16
+function getComputerMove(move) {
+    return move || randomPlay();
 }
 
-function getWinner(playerMove,computerMove) {
+
+    // I created the function getWinner with compares the the parameters of playerMove and computerMove to assign winnner variable. 4/26/16
+function getWinner(playerMove,computerMove)  {
     var winner;
-    // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
-    // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
-    // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
-    /* YOUR CODE HERE */
+    if (playerMove === computerMove){
+        winner = "tie";
+    } 
+    else if (playerMove === "rock" && computerMove === "scissors") {
+        winner = "player";
+    }
+    else if (playerMove === "paper" && computerMove === "rock") {
+        winner = "player";
+    }
+    else if (playerMove === "scissors" && computerMove === "paper") {
+        winner = "player";
+    }
+    else {
+        winner = "computer";
+    }
     return winner;
 }
+  
 
+//This was a tough one for me. Up until this point I hadn't seen so many functions and variables within a single function. 4/28/16
 function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
-    return [playerWins, computerWins];
+
+while (playerWins < 5 && computerWins < 5) {
+        var playerMove = getPlayerMove();
+        var computerMove = getComputerMove();
+        var winner = getWinner(playerMove, computerMove); 
+        if (winner === 'player') {
+        console.log("Player wins with " + playerMove + " while Computer loses with " + computerMove);
+        playerWins ++;
+        }else if (winner === 'computer') {
+        console.log("Computer wins with " + computerMove + " while Player loses with " + playerMove);
+        computerWins ++;
+        }else if (winner === 'tie'){
+        console.log("It's a tie! You both chose " + playerMove + "!");
+        playerWins += 0;
+        computerWins += 0;
 }
+    console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
+}
+return [playerWins, computerWins];
+}
+playToFive();
+
+    
+    
+
+
+
 
